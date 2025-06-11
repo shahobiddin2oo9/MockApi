@@ -211,7 +211,7 @@ form.addEventListener("submit", async function (e) {
     lastName: familya.value,
     email: email.value,
     phooneNUmber: phone.value,
-    isMerrid: check.checked ? "Ha" : "Yo'q",
+    isMerrid: check.checked ? true : false,
   };
 
   try {
