@@ -309,7 +309,7 @@ body {
 }
 
 .teacher-image::before {
-  content: "O'QITUVCHI";
+  content: "TEACHER";
   position: absolute;
   bottom: 10px;
   right: 15px;
