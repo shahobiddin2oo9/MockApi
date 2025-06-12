@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+header {
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(148, 146, 146, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #70f1ff;
+  text-shadow: 0 0 5px #f3d00a;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--text-color);
+  @media (max-width: 631px) {
+    font-size: 24px;
+  }
+  @media (max-width: 384px) {
+    font-size: 18px;
+  }
+}
+
+/*  */
+
+.bot-form {
+  background: #080826;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #00f2ff;
+  max-width: 350px;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.bot-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #dddddd;
+  text-shadow: 0 0 7px #00ffe7;
+}
+
+.bot-form input,
+.bot-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: #0d0d1a;
+  border: 2px solid #00ffe7;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.bot-form input:focus,
+.bot-form textarea:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+.bot-form button {
+  width: 100%;
+  padding: 12px;
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 5px #00ffe7;
+  transition: all 0.3s ease;
+}
+.background--img {
+  background-image: url(../bot.png);
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.208);
+  background-blend-mode: darken;
+}

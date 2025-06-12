@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>O'qituvchilar Boshqaruvi</title>
+    <title>O'quvchilar Boshqaruvi</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <div class="cardaa" id="bot"><a href="./bot.html">🤖</a></div>
@@ -11,12 +11,27 @@
     defer
     src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
   ></script>
-  <script defer type="module" src="./js/main.js"></script>
-
+  <script defer type="module" src="./js/Student.js"></script>
+  <style>
+    .back {
+      margin-top: 40px;
+      width: 45px;
+      background-color: #e3ea7f;
+      border: none;
+      padding: -10px;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      margin-bottom: 10px;
+    }
+    .back img {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
   <body>
     <header class="header">
       <a href="#" class="logo">
-        <span>O'qituvchilar</span>
+        <span>O'quvchilar</span>
       </a>
 
       <div class="search-bar">
@@ -26,17 +41,16 @@
 
       <div class="header-actions">
         <button class="mode-toggle" id="modeToggle">🌓</button>
-        <select name="isMarrriedSelect" id="isMarrriedSelect">
-          <option value="">Select</option>
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-        </select>
-
-        <button class="btn btn-primary" id="addTeacherBtn">addTeacher</button>
+        <button class="btn btn-primary" id="addTeacherBtn">addStudent</button>
       </div>
     </header>
 
     <div class="container">
+      <button class="back">
+        <a href="./index.html">
+          <img src="./back.png" alt="back no" />
+        </a>
+      </button>
       <div class="cards"></div>
       <div class="pagination"></div>
     </div>
@@ -56,7 +70,7 @@
             </svg>
           </div>
           <div class="content">
-            <p class="heading">add To Teacher</p>
+            <p class="heading">add To Student</p>
             <form action="">
               <input
                 id="avatar"
@@ -89,7 +103,7 @@
                 type="number"
               />
               <div class="checkboxDiv">
-                <label for="">isMerried :</label>
+                <label for="">isWORK :</label>
                 <input
                   id="check"
                   class="checkbox"

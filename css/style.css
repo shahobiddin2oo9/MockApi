@@ -309,7 +309,7 @@ body {
 }
 
 .teacher-image::before {
-  content: "TEACHER";
+  content: "Teacher and Student";
   position: absolute;
   bottom: 10px;
   right: 15px;
@@ -385,6 +385,10 @@ body {
     rgb(55, 0, 255) 100%
   );
 }
+.btn3 a {
+  text-decoration: none;
+  color: white;
+}
 .detail-title {
   font-weight: bold;
   color: var(--primary-color);
@@ -395,7 +399,7 @@ body {
 .manga-corner {
   position: absolute;
   width: 50px;
-  height: 50px;
+  height: 24px;
   border: 3px solid var(--primary-color);
 }
 
@@ -434,10 +438,13 @@ body {
 .pagination button {
   margin: 0 5px;
   padding: 6px 12px;
-  border: 1px solid #ccc;
-  background-color: white;
   cursor: pointer;
   border-radius: 4px;
+  border: none;
+  &:hover {
+    background-color: #1535d6 !important;
+    color: white;
+  }
 }
 
 .pagination button.active {
@@ -451,6 +458,7 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 .card {
   max-width: 430px;
   height: 420px;
@@ -633,4 +641,53 @@ body {
   margin-top: 10px;
   display: block;
   text-align: center;
+}
+
+#bot {
+  width: 70px;
+  height: 70px;
+  background-color: #5277ff;
+  border-radius: 50%;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-size: 32px;
+  color: white;
+  cursor: grab;
+  user-select: none;
+}
+#bot a {
+  text-decoration: none;
+}
+#isMarrriedSelect {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  background-color: #00ff2a;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+#isMarrriedSelect:hover {
+  border-color: #388e3c;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#isMarrriedSelect:focus {
+  border-color: #fbfbfb;
+  background-color: #4c85ff;
 }

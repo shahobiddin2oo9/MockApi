@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bot</title>
+    <link rel="stylesheet" href="./css/bot.css" />
+  </head>
+  <style>
+    .mainbot {
+      margin-top: 40px;
+    }
+    .back {
+      width: 45px;
+      background-color: #e3ea7f;
+      border: none;
+      padding: -10px;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      margin-bottom: 50px;
+    }
+    .back img {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+  <body>
+    <div class="background--img">
+      <header class="header">
+        <a href="#" class="logo">
+          <span
+            >Mu'ammoga duch kelgan busangiz ariza qoldirishingiz mumkin !</span
+          >
+        </a>
+      </header>
+
+      <div class="container">
+        <main class="mainbot">
+          <button class="back">
+            <a href="./index.html">
+              <img src="./back.png" alt="back no" />
+            </a>
+          </button>
+          <form class="bot-form">
+            <h2>🤖 Bot bilan aloqa</h2>
+            <input type="text" placeholder="Ismingiz" id="name" required />
+            <input
+              type="number"
+              placeholder="Telafon raqam"
+              id="phone"
+              required
+            />
+            <textarea
+              id="message"
+              rows="4"
+              placeholder="Ariza..."
+              required
+            ></textarea>
+            <button type="submit">Yuborish</button>
+          </form>
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/dark.js"></script>
+    <script src="./js/bot.js"></script>
+  </body>
+</html>

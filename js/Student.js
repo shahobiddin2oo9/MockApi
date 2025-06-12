@@ -5,16 +5,16 @@ const modal = document.querySelector(".modal");
 let form = document.querySelector("form");
 let pagination = document.querySelector(".pagination");
 let searchInput = document.querySelector(".input--search");
-let optionSelect = document.getElementById("isMarrriedSelect");
-let select = null;
 
+let select = null;
+let TeacherId = new URLSearchParams(location.search).get("id");
 function getCard({
   images,
   firstName,
   lastName,
   email,
-  phooneNUmber,
-  isMerrid,
+  phoneNumber,
+  isWORK,
   id,
 }) {
   return `
@@ -22,7 +22,7 @@ function getCard({
       <div class="manga-corner corner-bl"></div>
       <div class="manga-corner corner-br"></div>
       <div class="teacher-image">
-        <img src="${images}" alt="O'qituvchi rasmi" />
+        <img src="${images}" alt="student rasmi" />
       </div>
       <div class="teacher-details">
         <div class="detail-item">
@@ -46,22 +46,21 @@ function getCard({
           <div class="detail-icon">3</div>
           <div class="detail-content">
             <div class="detail-title">PhoneNumber</div>
-            <div class="detail-value">${phooneNUmber}</div>
+            <div class="detail-value">${phoneNumber}</div>
           </div>
         </div>
         <div class="detail-item">
           <div class="detail-icon">4</div>
           <div class="detail-content">
-            <div class="detail-title">isMerrid</div>
-            <div class="detail-value">${isMerrid}</div>
+            <div class="detail-title">isWORK</div>
+            <div class="detail-value">${isWORK}</div>
           </div>
         </div>
         <div class="detail-item">
           <div class="detail-content">
             <button class="btn1 editBtn" data-id="${id}">edit</button>
             <button class="btn2 deleteBtn" data-id="${id}">delete</button>
-            <button class="btn3 addStudent"data-id="${id}"><a href="../addStudent.html?id=${id}">addStudent</a></button>
-          </div>
+           </div>
         </div>
       </div>
     </div>
@@ -89,9 +88,9 @@ async function getTeachers() {
     };
 
     cards.innerHTML = "";
-    let { data } = await api(`/Teacher`, { params });
+    let { data } = await api(`/Teacher/${TeacherId}/student`, { params });
 
-    let { data: allData } = await api(`/Teacher`);
+    let { data: allData } = await api(`/Teacher/${TeacherId}/student`);
     totalPages = Math.ceil(allData.length / Limit);
     data.map((teacher) => (cards.innerHTML += getCard(teacher)));
 
@@ -128,7 +127,9 @@ document.addEventListener("click", function (e) {
     getTeachers();
   }
 });
+//
 
+//
 addTeacherBtn.addEventListener("click", () => {
   modal.classList.add("show");
 });
@@ -180,15 +181,15 @@ form.addEventListener("submit", async function (e) {
     firstName: name.value,
     lastName: familya.value,
     email: email.value,
-    phooneNumber: phone.value,
+    phoneNumber: phone.value,
     isMerrid: check.checked ? true : false,
   };
 
   try {
     if (select) {
-      await api.put(`/Teacher/${select}`, sendData);
+      await api.put(`/student/${select}`, sendData);
     } else {
-      await api.post("/Teacher", sendData);
+      await api.post(`/Teacher/${TeacherId}/student`, sendData);
     }
 
     modal.classList.remove("show");
@@ -206,13 +207,13 @@ document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("editBtn")) {
     let id = e.target.getAttribute("data-id");
     select = id;
-    let { data } = await api.get(`/Teacher/${id}`);
+    let { data } = await api(`/student/${id}`);
     form.avatar.value = data.images;
     form.NaMe.value = data.firstName;
     form.FAMILYA.value = data.lastName;
     form.Email.value = data.email;
-    form.number.value = data.phooneNUmber;
-    form.check.checked = data.isMerrid === true;
+    form.number.value = data.phoneNumber;
+    form.check.checked = data.isWORK;
     modal.classList.add("show");
   }
 
@@ -223,7 +224,8 @@ document.addEventListener("click", async (e) => {
     if (!isConfirmed) return;
 
     try {
-      await api.delete(`/Teacher/${id}`);
+      await api.delete(`/Teacher/${TeacherId}/student/${id}`);
+      console.log(id);
       getTeachers();
     } catch (err) {
       console.error("O‘chirishda xatolik:", err);
@@ -231,7 +233,6 @@ document.addEventListener("click", async (e) => {
     }
   }
 });
-
 searchInput.addEventListener("keyup", async function (e) {
   let search = e.target.value.trim();
   cards.innerHTML = `
@@ -264,44 +265,5 @@ searchInput.addEventListener("keyup", async function (e) {
     data.forEach((teacher) => (cards.innerHTML += getCard(teacher)));
   } catch (error) {
     console.log("Xatolik:", error);
-  }
-});
-
-optionSelect.addEventListener("change", async function (e) {
-  let selectPage = e.target.value === "Single" ? true : false;
-  pageCount = 1;
-
-  cards.innerHTML = `
-    <div>
-      <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!sw800" 
-      alt="Loading..." style="width: 300px;" />
-    </div>`;
-
-  try {
-    let params = {
-      page: pageCount,
-      limit: Limit,
-    };
-
-    let { data: allData } = await api(`/Teacher?isMerrid=${selectPage}`, {
-      params,
-    });
-    totalPages = Math.ceil(allData.length / Limit);
-
-    pagination.innerHTML = `<button class="nextPage" data-id="-">Prev</button>`;
-    for (let i = 1; i <= totalPages; i++) {
-      pagination.innerHTML += `<button class="nextPage ${
-        pageCount === i ? "active" : ""
-      }" data-id="${i}">${i}</button>`;
-    }
-    pagination.innerHTML += `<button class="nextPage" data-id="+">Next</button>`;
-
-    let { data } = await api(`/Teacher?isMerrid=${selectPage}`, { params });
-
-    cards.innerHTML = "";
-    data.forEach((teacher) => (cards.innerHTML += getCard(teacher)));
-  } catch (error) {
-    console.log("Xatolik:", error);
-    cards.innerHTML = `<p style="color:red;">Xatolik yuz berdi.</p>`;
   }
 });
