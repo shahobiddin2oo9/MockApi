@@ -268,7 +268,7 @@ searchInput.addEventListener("keyup", async function (e) {
 });
 
 optionSelect.addEventListener("change", async function (e) {
-  let selectPage = e.target.value === "Single" ? true : false;
+  let selectedValue = e.target.value;
   pageCount = 1;
 
   cards.innerHTML = `
@@ -283,9 +283,15 @@ optionSelect.addEventListener("change", async function (e) {
       limit: Limit,
     };
 
-    let { data: allData } = await api(`/Teacher?isMerrid=${selectPage}`, {
-      params,
-    });
+    let url = "/Teacher";
+
+    if (selectedValue === "Single") {
+      url += "?isMerrid=true";
+    } else if (selectedValue === "Married") {
+      url += "?isMerrid=false";
+    }
+
+    let { data: allData } = await api(url);
     totalPages = Math.ceil(allData.length / Limit);
 
     pagination.innerHTML = `<button class="nextPage" data-id="-">Prev</button>`;
@@ -296,7 +302,7 @@ optionSelect.addEventListener("change", async function (e) {
     }
     pagination.innerHTML += `<button class="nextPage" data-id="+">Next</button>`;
 
-    let { data } = await api(`/Teacher?isMerrid=${selectPage}`, { params });
+    let { data } = await api(url, { params });
 
     cards.innerHTML = "";
     data.forEach((teacher) => (cards.innerHTML += getCard(teacher)));
